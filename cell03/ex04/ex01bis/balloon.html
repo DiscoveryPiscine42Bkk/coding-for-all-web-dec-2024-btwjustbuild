@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explode the Balloon</title>
+    <style>
+        #balloon {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            margin: 100px auto;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        #balloon.popped {
+            background-color: transparent;
+            border: 2px dashed #333;
+            animation: popEffect 0.5s forwards;
+        }
+
+        @keyframes popEffect {
+            to {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="balloon"></div>
+
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let size = 100; // Starting size
+            const maxSize = 300; // Max balloon size
+
+            $('#balloon').on('click', function () {
+                if ($(this).hasClass('popped')) return;
+
+                size += 20; // Increment size
+                $(this).css({
+                    'width': size + 'px',
+                    'height': size + 'px'
+                });
+
+                if (size >= maxSize) {
+                    $(this).addClass('popped');
+                    alert('Boom! The balloon popped!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
