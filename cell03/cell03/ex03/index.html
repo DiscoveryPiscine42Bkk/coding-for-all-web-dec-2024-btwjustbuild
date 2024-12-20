@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #controls {
+            margin: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #ft_list {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            min-height: 50px;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+
+        #ft_list div {
+            background: #e0e0e0;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <button id="newTodo">New</button>
+    </div>
+    <div id="ft_list"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const listContainer = document.getElementById('ft_list');
+            const newTodoButton = document.getElementById('newTodo');
+
+            // Load existing to-dos from cookies
+            loadTodos();
+
+            // Add new to-do
+            newTodoButton.addEventListener('click', () => {
+                const todoText = prompt('Enter a new TO DO:');
+                if (todoText) {
+                    addTodo(todoText);
+                    saveTodos();
+                }
+            });
+
+            // Add a to-do to the list
+            function addTodo(text) {
+                const todoItem = document.createElement('div');
+                todoItem.textContent = text;
+                todoItem.addEventListener('click', () => {
+                    if (confirm('Do you want to remove this TO DO?')) {
+                        listContainer.removeChild(todoItem);
+                        saveTodos();
+                    }
+                });
+                listContainer.insertBefore(todoItem, listContainer.firstChild);
+            }
+
+            // Save to-dos to cookies
+            function saveTodos() {
+                const todos = Array.from(listContainer.children).map(todo => todo.textContent);
+                document.cookie = `todos=${encodeURIComponent(JSON.stringify(todos))}; path=/`;
+            }
+
+            // Load to-dos from cookies
+            function loadTodos() {
+                const cookies = document.cookie.split('; ').find(cookie => cookie.startsWith('todos='));
+                if (cookies) {
+                    const todos = JSON.parse(decodeURIComponent(cookies.split('=')[1]));
+                    todos.forEach(todo => addTodo(todo));
+                }
+            }
+        });
+    </script>
+</body>
+</html>

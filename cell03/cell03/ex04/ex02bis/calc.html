@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .calculator {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        input, select, button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input id="operand1" type="number" placeholder="Left operand">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input id="operand2" type="number" placeholder="Right operand">
+        <button id="calculateBtn">Try me!</button>
+        <div id="result"></div>
+    </div>
+
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#calculateBtn').on('click', function () {
+                const operand1 = parseFloat($('#operand1').val());
+                const operand2 = parseFloat($('#operand2').val());
+                const operator = $('#operator').val();
+                let result;
+
+                // Input validation
+                if (isNaN(operand1) || isNaN(operand2)) {
+                    $('#result').text('Please enter valid numbers.');
+                    return;
+                }
+
+                // Perform calculation based on the operator
+                switch (operator) {
+                    case '+':
+                        result = operand1 + operand2;
+                        break;
+                    case '-':
+                        result = operand1 - operand2;
+                        break;
+                    case '*':
+                        result = operand1 * operand2;
+                        break;
+                    case '/':
+                        result = operand2 !== 0 ? operand1 / operand2 : 'Error (division by 0)';
+                        break;
+                    case '%':
+                        result = operand2 !== 0 ? operand1 % operand2 : 'Error (mod by 0)';
+                        break;
+                    default:
+                        result = 'Invalid operator';
+                }
+
+                $('#result').text(`Result: ${result}`);
+            });
+        });
+    </script>
+</body>
+</html>
