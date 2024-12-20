@@ -1,51 +1,37 @@
-// Perform calculation
-function calculate() {
-    const operand1 = document.getElementById('operand1').value;
-    const operator = document.getElementById('operator').value;
-    const operand2 = document.getElementById('operand2').value;
+$(document).ready(function () {
+    $('#calculateBtn').on('click', function () {
+        const operand1 = parseFloat($('#operand1').val());
+        const operand2 = parseFloat($('#operand2').val());
+        const operator = $('#operator').val();
+        let result;
 
-    // Validate inputs
-    if (operand1 === '' || operand2 === '' || operand1 < 0 || operand2 < 0) {
-        alert('Error :(');
-        return;
-    }
-
-    const num1 = parseInt(operand1);
-    const num2 = parseInt(operand2);
-    let result;
-
-    if ((operator === '/' || operator === '%') && num2 === 0) {
-        alert("It's over 9000!");
-        console.log("It's over 9000!");
-        return;
-    }
-
-    switch (operator) {
-        case '+':
-            result = num1 + num2;
-            break;
-        case '-':
-            result = num1 - num2;
-            break;
-        case '*':
-            result = num1 * num2;
-            break;
-        case '/':
-            result = num1 / num2;
-            break;
-        case '%':
-            result = num1 % num2;
-            break;
-        default:
-            alert('Invalid operator');
+        // Input validation
+        if (isNaN(operand1) || isNaN(operand2)) {
+            $('#result').text('Please enter valid numbers.');
             return;
-    }
+        }
 
-    alert(`Result: ${result}`);
-    console.log(`Result: ${result}`);
-}
+        // Perform calculation based on the operator
+        switch (operator) {
+            case '+':
+                result = operand1 + operand2;
+                break;
+            case '-':
+                result = operand1 - operand2;
+                break;
+            case '*':
+                result = operand1 * operand2;
+                break;
+            case '/':
+                result = operand2 !== 0 ? operand1 / operand2 : 'It’s over 9000!';
+                break;
+            case '%':
+                result = operand2 !== 0 ? operand1 % operand2 : 'It’s over 9000!';
+                break;
+            default:
+                result = 'Invalid operator';
+        }
 
-// Reminder alert every 30 seconds
-setInterval(() => {
-    alert('Please, use me...');
-}, 30000);
+        $('#result').text(`Result: ${result}`);
+    });
+});
