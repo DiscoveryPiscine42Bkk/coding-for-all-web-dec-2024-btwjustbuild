@@ -1,11 +1,10 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+html, body {
+    height: 100%;
     margin: 0;
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: #f0f0f0; /* Optional background */
 }
 
 #balloon {
@@ -15,4 +14,17 @@ body {
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+#balloon.popped {
+    background-color: transparent;
+    border: 2px dashed #333;
+    animation: popEffect 0.5s forwards;
+}
+
+@keyframes popEffect {
+    to {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
