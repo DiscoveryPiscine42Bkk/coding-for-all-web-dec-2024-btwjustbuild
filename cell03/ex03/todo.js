@@ -1,44 +1,50 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const listContainer = document.getElementById('ft_list');
-    const newTodoButton = document.getElementById('newTodo');
+// โหลด To-Do List จาก LocalStorage เมื่อเปิดหน้าเว็บ
+window.onload = () => {
+    loadToDo();
+};
 
-    // Load existing to-dos from cookies
-    loadTodos();
-
-    // Add new to-do
-    newTodoButton.addEventListener('click', () => {
-        const todoText = prompt('Enter a new TO DO:');
-        if (todoText) {
-            addTodo(todoText);
-            saveTodos();
-        }
-    });
-
-    // Add a to-do to the list
-    function addTodo(text) {
-        const todoItem = document.createElement('div');
-        todoItem.textContent = text;
-        todoItem.addEventListener('click', () => {
-            if (confirm('Do you want to remove this TO DO?')) {
-                listContainer.removeChild(todoItem);
-                saveTodos();
-            }
-        });
-        listContainer.insertBefore(todoItem, listContainer.firstChild);
+// ฟังก์ชันเพิ่ม To-Do ใหม่
+document.getElementById("newBtn").onclick = () => {
+    const todoText = prompt("Enter your TO DO:").trim();
+    if (todoText) {
+        addToDo(todoText);
+        saveToDo();
     }
+};
 
-    // Save to-dos to cookies
-    function saveTodos() {
-        const todos = Array.from(listContainer.children).map(todo => todo.textContent);
-        document.cookie = `todos=${JSON.stringify(todos)}; path=/`;
-    }
+// ฟังก์ชันเพิ่ม To-Do ไปที่ DOM
+function addToDo(text) {
+    const toDoDiv = document.createElement("div");
+    toDoDiv.textContent = text;
+    toDoDiv.onclick = () => deleteToDo(toDoDiv);
+    const list = document.getElementById("ft_list");
 
-    // Load to-dos from cookies
-    function loadTodos() {
-        const cookies = document.cookie.split('; ').find(cookie => cookie.startsWith('todos='));
-        if (cookies) {
-            const todos = JSON.parse(cookies.split('=')[1]);
-            todos.forEach(todo => addTodo(todo));
-        }
+    // เพิ่มที่ด้านล่างสุดของรายการ
+    list.appendChild(toDoDiv); // ใช้ appendChild แทน insertBefore
+
+}
+
+// ฟังก์ชันลบ To-Do
+function deleteToDo(toDoDiv) {
+    if (confirm("Do you really want to delete this TO DO?")) {
+        toDoDiv.remove();
+        saveToDo();
     }
-});
+}
+
+// ฟังก์ชันบันทึก To-Do List ลง LocalStorage
+function saveToDo() {
+    const list = document.querySelectorAll("#ft_list div");
+    const toDoArray = [];
+    list.forEach(item => toDoArray.push(item.textContent));
+    localStorage.setItem("todo", JSON.stringify(toDoArray)); // เก็บข้อมูลใน LocalStorage
+}
+
+// ฟังก์ชันโหลด To-Do จาก LocalStorage
+function loadToDo() {
+    const toDoData = localStorage.getItem("todo");
+    if (toDoData) {
+        const toDoArray = JSON.parse(toDoData);
+        toDoArray.forEach(item => addToDo(item));
+    }
+}

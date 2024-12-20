@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do or Not To Do</title>
+    <style>
+        /* CSS สำหรับตกแต่ง To-Do List */
+        #ft_list div {
+            background-color: #f2f2f2;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #ft_list div:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <button id="newBtn">New</button>
+    <div id="ft_list"></div>
+
+    <!-- Include jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Inline JavaScript Code -->
+    <script>
+        $(document).ready(function () {
+            // Load To-Do List from LocalStorage on page load
+            loadToDo();
+
+            // Add a new To-Do
+            $("#newBtn").click(function () {
+                const todoText = prompt("Enter your TO DO:").trim();
+                if (todoText) {
+                    addToDo(todoText);
+                    saveToDo();
+                }
+            });
+
+            // Function to add a To-Do
+            function addToDo(text) {
+                const $toDoDiv = $("<div></div>").text(text);
+
+                // Add click event to delete To-Do
+                $toDoDiv.click(function () {
+                    if (confirm("Do you really want to delete this TO DO?")) {
+                        $(this).remove();
+                        saveToDo();
+                    }
+                });
+
+                // Append to the list
+                $("#ft_list").append($toDoDiv);
+            }
+
+            // Save To-Do List to LocalStorage
+            function saveToDo() {
+                const toDoArray = [];
+                $("#ft_list div").each(function () {
+                    toDoArray.push($(this).text());
+                });
+                localStorage.setItem("todo", JSON.stringify(toDoArray));
+            }
+
+            // Load To-Do List from LocalStorage
+            function loadToDo() {
+                const toDoData = localStorage.getItem("todo");
+                if (toDoData) {
+                    const toDoArray = JSON.parse(toDoData);
+                    toDoArray.forEach(item => addToDo(item));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
