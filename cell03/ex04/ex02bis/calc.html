@@ -9,8 +9,8 @@
     <h1>Basic Calculator</h1>
 
     <!-- Input Fields -->
-    <input type="text" id="leftOperand" placeholder="Left number (>=0)" min="0">
-    <select id="operator">
+    <input type="text" id="leftOperand" placeholder="Left number (>=0)" min="0"> <!-- input text  -->
+    <select id="operator"> <!-- input operator -->
         <option value="+">+</option>
         <option value="-">-</option>
         <option value="*">*</option>
@@ -25,17 +25,19 @@
     <!-- JavaScript -->
     <script>
         // Function to validate inputs and perform the calculation
-        function performCalculation() {
+        function performCalculation() { /* Perform result by elementbyid left op right value */
             const leftOperand = document.getElementById('leftOperand').value;
             const operator = document.getElementById('operator').value;
             const rightOperand = document.getElementById('rightOperand').value;
 
             // Convert inputs to integers
-            const left = parseInt(leftOperand);
+            const left = parseInt(leftOperand); /* parseInt() reads characters in the input string from left to right.
+                                                    It stops parsing when it encounters a non-numeric character (or the end of the string).
+                                                    If the string does not begin with a valid number, it returns NaN (Not a Number). */
             const right = parseInt(rightOperand);
 
             // Input validation: check for positive integers
-            if (isNaN(left) || isNaN(right) || left < 0 || right < 0) {
+            if (isNaN(left) || isNaN(right) || left < 0 || right < 0) { /* when covert str to int and got NaN.Show up Error */
                 alert("Error :(");
                 console.log("Error :(");
                 return;
@@ -81,11 +83,12 @@
         }
 
         // Add event listener to button
-        document.getElementById('calculateBtn').addEventListener('click', performCalculation);
-
+        document.getElementById('calculateBtn').addEventListener('click', performCalculation); /* The document object represents the entire HTML page (DOM).
+                                                        The getElementById() method is used to find and return the first element that matches the specified ID.
+                                                        If no element with the specified ID exists, it will return null. */
         // Reminder alert every 30 seconds
         setInterval(() => {
-            alert("Please, use me...");
+            alert("Please, use me..."); /* Alert when not use in 30 sec */
         }, 30000);
     </script>
 </body>

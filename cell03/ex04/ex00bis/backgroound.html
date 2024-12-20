@@ -15,7 +15,8 @@
         // jQuery to change the background color
         $(document).ready(function() {
             $('#changeColorBtn').click(function() {
-                const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+                const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16); 
+                /*math.random = 0-1 , math.floor ปัดเลขลง , 16777215 เกิดจาก 256x256x256 = 16777216 นับที่ 0 - 16777215 16777215= FFFFFF = สีขาว*/
                 $('body').css('background-color', randomColor);
             });
         });

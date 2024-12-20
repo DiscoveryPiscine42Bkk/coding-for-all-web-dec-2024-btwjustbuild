@@ -45,27 +45,27 @@
     <!-- jQuery Library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        const balloon = document.getElementById('balloon');
+        const balloon = document.getElementById('balloon'); /*getElementById คือดึง id จาก div มาใช้*/
 
 	let size = 200; // Initial size of the balloon
-	let colors = ['red', 'green', 'blue'];
-	let colorIndex = 0;
+	let colors = ['red', 'green', 'blue']; /*red=0 green=1 blue=2*/
+	let colorIndex = 0; /*เริ่มต้นจากสีแดง*/
 
 	balloon.addEventListener('click', () => {
     	// Increase size by 10px
     	size += 10;
 
     	// Cycle through colors
-    	colorIndex = (colorIndex + 1) % colors.length;
+    	colorIndex = (colorIndex + 1) % colors.length; /*list สี + 1 % len ของ list index*/
     	balloon.style.backgroundColor = colors[colorIndex];
 
     	// Apply new size
-    	balloon.style.width = `${size}px`;
-    	balloon.style.height = `${size}px`;
+    	balloon.style.width = `${size}px`; /* Apply new size that increase ballon size */
+    	balloon.style.height = `${size}px`; /* this function match with ballon.addEventListener('click',()) */
 
     	// Explode the balloon if size > 420px
     	if (size > 420) {
-        	resetBalloon();
+        	resetBalloon(); /* เข้า function popped บอลลูน */
     	}
 });
 
@@ -74,17 +74,17 @@
     	size = Math.max(size - 5, 200);
 
     	// Cycle colors in reverse
-    	colorIndex = (colorIndex - 1 + colors.length) % colors.length;
+    	colorIndex = (colorIndex - 1 + colors.length) % colors.length; /* reverse shrink */
     	balloon.style.backgroundColor = colors[colorIndex];
 
     	// Apply new size
-    	balloon.style.width = `${size}px`;
-    	balloon.style.height = `${size}px`;
+    	balloon.style.width = `${size}px`; /* Apply new size that shrink the ballon */
+    	balloon.style.height = `${size}px`; /* This function match with balloon.addEventListener('mouseleave', () */
 });
 
 	function resetBalloon() {
     // Temporarily "pop" to size 420px with a pop effect
-    balloon.classList.add('popped');
+    balloon.classList.add('popped'); /* function effect ballon popped */
     
     // Reset balloon size and color after the pop animation
     setTimeout(() => {
@@ -96,7 +96,6 @@
         balloon.classList.remove('popped');
     }, 500); // Matches the popEffect animation duration
 }
-
 
     </script>
 </body>

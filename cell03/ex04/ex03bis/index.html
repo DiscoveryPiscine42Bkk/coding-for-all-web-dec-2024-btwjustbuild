@@ -23,7 +23,8 @@
 <body>
     <h1>To Do List</h1>
     <button id="newBtn">New</button>
-    <div id="ft_list"></div>
+    <div id="ft_list"></div> <!-- Assigns a unique ID to the <div>.
+        This container is where new to-do items will be dynamically added (appended) using JavaScript or jQuery. -->
 
     <!-- Include jQuery Library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -36,16 +37,18 @@
 
             // Add a new To-Do
             $("#newBtn").click(function () {
-                const todoText = prompt("Enter your TO DO:").trim();
-                if (todoText) {
+                const todoText = prompt("Enter your TO DO:").trim(); /* have prompt to ask what u want to do */
+                if (todoText) { /* if todotext have str will add to todo text and save to do in todoarray */
                     addToDo(todoText);
                     saveToDo();
                 }
             });
 
             // Function to add a To-Do
-            function addToDo(text) {
-                const $toDoDiv = $("<div></div>").text(text);
+            function addToDo(text) { /* add to do by  */
+                const $toDoDiv = $("<div></div>").text(text); /* The .text() method sets the text content of the created <div> element. */
+                    /* Creates a new <div> element.Sets its inner text to the value of the text variable.
+                        Wraps the <div> element as a jQuery object and assigns it to the $toDoDiv variable. */
 
                 // Add click event to delete To-Do
                 $toDoDiv.click(function () {
@@ -54,10 +57,15 @@
                         saveToDo();
                     }
                 });
+                /* The user clicks on a to-do item ($toDoDiv). The browser shows a confirmation dialog:
+                    If the user clicks "OK", the item is removed from the DOM, and saveToDo() is called.
+                    If the user clicks "Cancel", nothing happens.
+                    After removal, saveToDo() ensures that the to-do list remains synchronized updating storage */
 
                 // Append to the list
                 $("#ft_list").append($toDoDiv);
-            }
+            } /* A new <div> element ($toDoDiv) is created dynamically with some text content.
+                This line of code adds that <div> as a child element of the #ft_list container. */
 
             // Save To-Do List to LocalStorage
             function saveToDo() {
@@ -66,17 +74,25 @@
                     toDoArray.push($(this).text());
                 });
                 localStorage.setItem("todo", JSON.stringify(toDoArray));
-            }
+            } /* Creates an empty array toDoArray to store all to-do items.
+                Iterates over all <div> elements inside the #ft_list container.
+                Collects the text content of each <div> and pushes it into the array.
+                Saves the array to localStorage under the key "todo". */
 
             // Load To-Do List from LocalStorage
-            function loadToDo() {
+            function loadToDo() { /* Retrieves saved to-do data as a string.Parses it back into an array.
+                                        Iterates through the array and calls addToDo() to recreate each to-do item on the page. */
                 const toDoData = localStorage.getItem("todo");
                 if (toDoData) {
                     const toDoArray = JSON.parse(toDoData);
-                    toDoArray.forEach(item => addToDo(item));
+                    toDoArray.forEach(item => addToDo(item)); /* Dynamically creates a <div> element for the to-do item. Adds it to the #ft_list container.
+                                                                Sets up any event listeners (like delete functionality). */
                 }
             }
         });
+
+        /* Why we need to use Persistence: Ensures that the to-do list is restored even after refreshing the page or reopening the browser.
+                                User Experience: Automatically recreates all saved tasks for a seamless experience. */
     </script>
 </body>
 </html>
