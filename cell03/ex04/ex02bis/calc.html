@@ -4,106 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-
-        .calculator {
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        input, select, button {
-            margin: 5px;
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        #result {
-            margin-top: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
 </head>
 <body>
-    <div class="calculator">
-        <input id="operand1" type="number" placeholder="Left operand">
-        <select id="operator">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="*">*</option>
-            <option value="/">/</option>
-            <option value="%">%</option>
-        </select>
-        <input id="operand2" type="number" placeholder="Right operand">
-        <button id="calculateBtn">Try me!</button>
-        <div id="result"></div>
-    </div>
+    <h1>Basic Calculator</h1>
 
-    <!-- jQuery Library -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Input Fields -->
+    <input type="text" id="leftOperand" placeholder="Left number (>=0)" min="0">
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+    </select>
+    <input type="text" id="rightOperand" placeholder="Right number (>=0)" min="0">
+
+    <!-- Submit Button -->
+    <button id="calculateBtn">Try me!</button>
+
+    <!-- JavaScript -->
     <script>
-        $(document).ready(function () {
-            $('#calculateBtn').on('click', function () {
-                const operand1 = parseFloat($('#operand1').val());
-                const operand2 = parseFloat($('#operand2').val());
-                const operator = $('#operator').val();
-                let result;
+        // Function to validate inputs and perform the calculation
+        function performCalculation() {
+            const leftOperand = document.getElementById('leftOperand').value;
+            const operator = document.getElementById('operator').value;
+            const rightOperand = document.getElementById('rightOperand').value;
 
-                // Input validation
-                if (isNaN(operand1) || isNaN(operand2)) {
-                    $('#result').text('Please enter valid numbers.');
+            // Convert inputs to integers
+            const left = parseInt(leftOperand);
+            const right = parseInt(rightOperand);
+
+            // Input validation: check for positive integers
+            if (isNaN(left) || isNaN(right) || left < 0 || right < 0) {
+                alert("Error :(");
+                console.log("Error :(");
+                return;
+            }
+
+            let result;
+
+            // Perform calculation based on the operator
+            switch (operator) {
+                case '+':
+                    result = left + right;
+                    break;
+                case '-':
+                    result = left - right;
+                    break;
+                case '*':
+                    result = left * right;
+                    break;
+                case '/':
+                    if (right === 0) {
+                        alert("It's over 9000!");
+                        console.log("It's over 9000!");
+                        return;
+                    }
+                    result = left / right;
+                    break;
+                case '%':
+                    if (right === 0) {
+                        alert("It's over 9000!");
+                        console.log("It's over 9000!");
+                        return;
+                    }
+                    result = left % right;
+                    break;
+                default:
+                    alert("Invalid operator!");
                     return;
-                }
+            }
 
-                // Perform calculation based on the operator
-                switch (operator) {
-                    case '+':
-                        result = operand1 + operand2;
-                        break;
-                    case '-':
-                        result = operand1 - operand2;
-                        break;
-                    case '*':
-                        result = operand1 * operand2;
-                        break;
-                    case '/':
-                        result = operand2 !== 0 ? operand1 / operand2 : 'Error (division by 0)';
-                        break;
-                    case '%':
-                        result = operand2 !== 0 ? operand1 % operand2 : 'Error (mod by 0)';
-                        break;
-                    default:
-                        result = 'Invalid operator';
-                }
+            // Display result in alert and console
+            alert("Result: " + result);
+            console.log("Result:", result);
+        }
 
-                $('#result').text(`Result: ${result}`);
-            });
-        });
+        // Add event listener to button
+        document.getElementById('calculateBtn').addEventListener('click', performCalculation);
+
+        // Reminder alert every 30 seconds
+        setInterval(() => {
+            alert("Please, use me...");
+        }, 30000);
     </script>
 </body>
 </html>
