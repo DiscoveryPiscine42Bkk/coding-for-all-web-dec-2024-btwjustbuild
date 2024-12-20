@@ -4,23 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Calculator</title>
-    <link rel="stylesheet" href="calc.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="calculator">
-        <input id="operand2" type="number" placeholder="Left operand">
-        <select id="operator">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="*">*</option>
-            <option value="/">/</option>
-            <option value="%">%</option>
-        </select>
-        <input id="operand2" type="number" placeholder="Right operand">
-        <button id="calculateBtn">Try me!</button>
-        <p id="result"></p>
-    </div>
-    <script src="calc.js"></script>
+    <h1>Basic Calculator</h1>
+
+    <!-- Input Fields -->
+    <input type="text" id="leftOperand" placeholder="Left number (>=0)" min="0">
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+    </select>
+    <input type="text" id="rightOperand" placeholder="Right number (>=0)" min="0">
+
+    <!-- Submit Button -->
+    <button id="calculateBtn">Try me!</button>
+
+    <!-- JavaScript -->
+    <script>
+        // Function to validate inputs and perform the calculation
+        function performCalculation() {
+            const leftOperand = document.getElementById('leftOperand').value;
+            const operator = document.getElementById('operator').value;
+            const rightOperand = document.getElementById('rightOperand').value;
+
+            // Convert inputs to integers
+            const left = parseInt(leftOperand);
+            const right = parseInt(rightOperand);
+
+            // Input validation: check for positive integers
+            if (isNaN(left) || isNaN(right) || left < 0 || right < 0) {
+                alert("Error :(");
+                console.log("Error :(");
+                return;
+            }
+
+            let result;
+
+            // Perform calculation based on the operator
+            switch (operator) {
+                case '+':
+                    result = left + right;
+                    break;
+                case '-':
+                    result = left - right;
+                    break;
+                case '*':
+                    result = left * right;
+                    break;
+                case '/':
+                    if (right === 0) {
+                        alert("It's over 9000!");
+                        console.log("It's over 9000!");
+                        return;
+                    }
+                    result = left / right;
+                    break;
+                case '%':
+                    if (right === 0) {
+                        alert("It's over 9000!");
+                        console.log("It's over 9000!");
+                        return;
+                    }
+                    result = left % right;
+                    break;
+                default:
+                    alert("Invalid operator!");
+                    return;
+            }
+
+            // Display result in alert and console
+            alert("Result: " + result);
+            console.log("Result:", result);
+        }
+
+        // Add event listener to button
+        document.getElementById('calculateBtn').addEventListener('click', performCalculation);
+
+        // Reminder alert every 30 seconds
+        setInterval(() => {
+            alert("Please, use me...");
+        }, 30000);
+    </script>
 </body>
 </html>
