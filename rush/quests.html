@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest Board - NongO's Guild</title>
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IM Fell English', serif;
+            background: url('https://images3.alphacoders.com/132/1329171.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Header */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(20, 20, 50, 0.85);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #9b7f45;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'IM Fell English', serif;
+            font-size: 2rem;
+            color: #f8d76b;
+            text-decoration: none;
+        }
+
+        .nav-bar {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-bar a {
+            color: #f8d76b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-bar a:hover {
+            color: #ffdb58;
+        }
+
+        /* Quest Board */
+        .quest-board {
+            background: url('https://c1.wallpaperflare.com/preview/967/303/707/vintage-boards-wood-the-background-texture.jpg') no-repeat center center;
+            background-size: auto;
+            border: 5px solid rgba(80, 17, 0, 0.497);
+            width: 70%;
+            top: 35px;
+            max-width: 750px;
+            height: 80vh;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center; /* Align quests horizontally */
+            align-items: center;
+            padding: 20px;
+            gap: 90px; /* Adds space between horizontal quests */
+            position: relative;
+        }
+
+         /* Quest Papers */
+         .quest {
+            background: url('https://plus.unsplash.com/premium_photo-1667761637876-e704c906927d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8b2xkJTIwcGFwZXJ8ZW58MHx8MHx8fDA%3D') no-repeat center center; /* Paper texture */
+            background-size: cover;
+            color: #332821;
+            font-size: 1.2rem;
+            padding: 20px;
+            width: 300px; /* Fixed width for each quest paper */
+            height: 400px; /* Fixed height for alignment */
+            border: 2px solid #f1b361;
+            box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 10px;
+        }
+
+        .quest:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .quest-board h1 {
+            position: absolute;
+            top: 10px;
+            font-size: 3rem;
+            color: #4b3a2b;
+            text-shadow: 2px 2px 5px #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">NongO's Guild</a>
+        <nav class="nav-bar">
+            <a href="quests.html">Quests</a>
+        </nav>
+    </header>
+
+    <!-- Quest Board -->
+<div class="quest-board">
+    <h1>Quest Board</h1>
+    
+    <!-- First Contact -->
+    <div class="quest" onclick="alert('Accept Quest to Dead or Alive Thanakrit Samoena!')">
+        <img src="https://img2.pic.in.th/pic/IMG_7370.png" alt="Thanakrit Samoena" class="contact-img">
+        <strong>Thanakrit Samoena</strong><br>
+        <p>Instagram: 
+            <a href="https://www.instagram.com/tha.nack/" target="_blank">tha.nack</a>
+        </p>
+        <p>Facebook: 
+            <a href="https://www.facebook.com/nack.thanakrit.7" target="_blank">Thanakrit</a>
+        </p>
+        <p>Phone: 0985352054</a></p>
+    </div>
+
+    <!-- Second Contact -->
+    <div class="quest" onclick="alert('Accept Quest to Dead or Alive Nattapong Suphawirojlert!')">
+        <img src="https://img2.pic.in.th/pic/IMG_7371.png" alt="Nattapong Suphawirojlert" class="contact-img">
+        <strong>Nattapong Suphawirojlert</strong><br>
+        <p>Instagram: 
+            <a href="https://www.instagram.com/b.quilntp/" target="_blank">b.quilntp</a>
+        </p>
+        <p>Facebook: 
+            <a href="https://www.facebook.com/BuildNattapong/" target="_blank">Nattapong</a>
+        </p>
+        <p>Phone: 0984345641</p>
+    </div>
+</div>
+
+</body>
+</html>

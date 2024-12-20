@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Forest Encounter - Expanded Portfolio</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://images5.alphacoders.com/128/thumb-1920-1282888.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Portfolio Screen Container */
+        .portfolio-container {
+            width: 90%;
+            max-width: 900px;
+            height: 500px;
+            border: 5px solid #444;
+            background: rgba(0, 0, 0, 0.8);
+            position: relative;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        /* Character Styles */
+        .character {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero {
+            left: 5%;
+            bottom: 10%;
+        }
+
+        .monster {
+            right: 5%;
+            top: 10%;
+        }
+
+        .character img {
+            width: 150px;
+            filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.7));
+        }
+
+        .name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #ffdd57;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        /* Extra Pictures Section */
+        .extra-pictures {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .extra-pictures img {
+            width: 120px;
+            height: auto;
+            border: 3px solid #6c5f5b;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s;
+        }
+
+        .extra-pictures img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Dialogue Box */
+        .dialogue-box {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 3px solid #6c5f5b;
+            padding: 20px;
+            color: #ffdd57;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dialogue-text {
+            flex: 1;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            background-color: #4b4b4b;
+            border: 2px solid #9e8e71;
+            color: #ffdd57;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .action-button:hover {
+            background-color: #6c5f5b;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Portfolio Container -->
+    <div class="portfolio-container">
+        <!-- Hero -->
+        <div class="character hero">
+            <div class="name">Hero</div>
+            <img src="https://img2.pic.in.th/pic/imagesc378a6a3c0c4b443.png" alt="Hero">
+        </div>
+
+        <!-- Monster -->
+        <div class="character monster">
+            <div class="name">Monster</div>
+            <img src="https://img2.pic.in.th/pic/IMG_7370.png" alt="Monster">
+        </div>
+
+        <!-- Extra Pictures Section -->
+        <div class="extra-pictures">
+            <img src="https://img2.pic.in.th/pic/fsc2.jpg" alt="Award 1">
+            <img src="https://img2.pic.in.th/pic/robo.jpg" alt="Award 2">
+            <img src="https://img2.pic.in.th/pic/tobe1.jpg" alt="Award 3">
+        </div>
+
+        <!-- Dialogue Box -->
+        <div class="dialogue-box">
+            <div id="dialogue-text" class="dialogue-text">
+                A shadowy figure appears in the dark forest...
+            </div>
+            <div class="button-container">
+                <button class="action-button" onclick="nextDialogue()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const dialogueText = document.getElementById("dialogue-text");
+
+        const dialogues = [
+            "A shadowy figure appears in the dark forest...",
+            "Monster: \"Greetings, Hero! I'm Thanakrit Samoena.\"",
+            "Monster: \"I'm student from King Mongkut's Institute of Technology Ladkrabang.\"",
+            "Monster: \"I work with Python C Language and C++ Language.\"",
+            "Monster: \"Let see my projects\"",
+            "Monster told you to look up in the sky. ✨",
+            "The project I am most proud of is Field Safe Crosswalk Utilized object detection and basic command in the Cira Core",
+            "combined with an Arduino Uno R3 board to control devices, creating an innovative invention.",
+            "I received a gold medal and ranked 4th nationally in 46ict challenge",
+            "Second project are designed and developed a transport robot to compete in the Roboinnovator Challenge 2022.",
+            "The competition involved delivering packages to designated locations in a simulated city without human control",
+            "I learned fundamental skills in using Python, OpenCV (a library for basic image processing), and Raspberry Pi",
+            "Lastly, ToBeIT'67 The Second was a camp that introduced me to the Faculty of Information Technology.",
+            "During my time at the camp, I gained knowledge that I had never encountered in the classroom.",
+            "I truly enjoyed and felt very happy learning from the camp mentors,",
+            "Who generously shared new knowledge and experiences with me.",
+            "That's all",
+            "The forest begins to clear as Thanakrit Samoena's story ends."
+        ];
+
+        let currentDialogue = 0;
+
+        function nextDialogue() {
+            currentDialogue++;
+            if (currentDialogue < dialogues.length) {
+                dialogueText.innerText = dialogues[currentDialogue];
+            } else {
+                // Redirect to the realm page after the dialogue ends
+                window.location.href = "realm.html"; // Replace "realm.html" with your actual page URL
+            }
+        }
+    </script>
+</body>
+</html>

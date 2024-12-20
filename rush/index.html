@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Guild - NongO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IM Fell English', serif;
+            color: #fff;
+            background: url('https://images5.alphacoders.com/640/640377.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(20, 20, 50, 0.85);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #9b7f45;
+            z-index: 10;
+        }
+        .logo {
+            font-family: 'IM Fell English', serif;
+            font-size: 2rem;
+            color: #f8d76b;
+            text-decoration: none;
+            text-shadow: 3px 3px 5px #000;
+        }
+        .nav-bar {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-bar a {
+            color: #f8d76b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .nav-bar a:hover {
+            color: #ffdb58;
+            text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Main Content */
+        .content {
+            text-align: center;
+        }
+        .title {
+            font-family: 'IM Fell English', serif;
+            font-size: 5rem;
+            color: #f8d76b;
+            text-shadow: 
+                1px 1px 0px #000,
+                2px 2px 0px #000,
+                3px 3px 0px #000,
+                4px 4px 8px #9b7f45;
+            animation: floatText 3s ease-in-out infinite;
+        }
+        .subtext {
+            font-size: 1.8rem;
+            margin-top: 15px;
+            color: #f1e7d0;
+            text-shadow: 0px 0px 8px rgba(241, 231, 208, 0.8);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        /* Button */
+        .enter-btn {
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #9b7f45, #6c542e);
+            color: #fff;
+            font-family: 'IM Fell English', serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+        .enter-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+        }
+        /* Animations */
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes glow {
+            from { text-shadow: 0px 0px 5px rgba(241, 231, 208, 0.6); }
+            to { text-shadow: 0px 0px 15px rgba(241, 231, 208, 0.9); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">NongO's Guild</a>
+        <nav class="nav-bar">
+            <a href="quests.html">Quests</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1 class="title">Welcome, Hero!</h1>
+        <p class="subtext">Our adventure begins here...</p>
+        <a href="realm.html" class="enter-btn-link">
+            <button class="enter-btn">Enter Realm</button>
+        </a>
+    </div>
+</body>
+</html>

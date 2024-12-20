@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Forest Realm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IM Fell English', serif;
+            background: url('https://images5.alphacoders.com/128/thumb-1920-1282888.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Darkness Overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        /* Navigation Bar */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(20, 20, 50, 0.85);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #9b7f45;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'IM Fell English', serif;
+            font-size: 2rem;
+            color: #f8d76b;
+            text-decoration: none;
+            text-shadow: 3px 3px 5px #000;
+        }
+
+        .nav-bar {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-bar a {
+            color: #f8d76b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-bar a:hover {
+            color: #ffdb58;
+            text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            color: #ffd700;
+            text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
+            z-index: 2;
+            
+        }
+
+        /* NPC Monsters */
+        .monster {
+            position: absolute;
+            width: 430px;
+            height: 430px;
+            background-size: cover;
+            z-index: 2;
+            animation: floatMonster 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .monster1 {
+            background-image: url('https://img2.pic.in.th/pic/zombie1bf163142048278d.png');
+            top: 28%;
+            left: 18%;
+        }
+
+        .monster2 {
+            background-image: url('https://i.pinimg.com/originals/f1/e2/a1/f1e2a1bc28d6154515fe08ce94b36ec4.png');
+            top: 23%;
+            left: 52%;
+        }
+
+        /* Floating Animation */
+        @keyframes floatMonster {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Interaction Text */
+        .interaction {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #f1c40f;
+            text-align: center;
+            z-index: 2;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* NPC Textbox */
+        .npc-box {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+            color: #fff;
+            font-size: 1.2rem;
+            display: none;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <a href="index.html" class="logo">NongO's Guild</a>
+        <nav class="nav-bar">
+
+            <a href="quests.html">Quests</a>
+        </nav>
+    </header>
+
+    <!-- Darkness Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Title -->
+    <h1 class="title">Welcome to the Dark Forest Realm</h1>
+
+    <!-- Monsters -->
+    <div class="monster monster1" id="monster1"></div>
+    <div class="monster monster2" id="monster2"></div>
+
+    <!-- Interaction Text -->
+    <div class="interaction">Click on the monsters to interact!</div>
+
+    <!-- NPC Interaction Box -->
+    <div class="npc-box" id="npcBox">Hello traveler...</div>
+
+    <!-- JavaScript for Interaction -->
+    <script>
+        const npcBox = document.getElementById('npcBox');
+        let monster1Clicked = false; // Tracks monster1 state
+        let monster2Clicked = false; // Tracks monster2 state
+    
+        // Monster 1 Interaction Logic
+        document.getElementById('monster1').addEventListener('click', () => {
+    if (!monster1Clicked) {
+        npcBox.innerHTML = "I am Thanakrit Samoena!";
+        npcBox.style.display = "block";
+        monster1Clicked = true; // First interaction done
+    } else {
+        npcBox.innerHTML = "You engage Thanakrit Samoena in battle!";
+        npcBox.style.display = "block";
+        
+        // After the 5-second delay, warp to the fight page
+        setTimeout(() => {
+            window.location.href = "Thanakrit_samoena.html"; // Redirect to fight page
+        }, 3000);
+    }
+
+    setTimeout(() => {
+        npcBox.style.display = "none";
+    }, 3000);
+});
+
+        // Monster 2 Interaction Logic
+        document.getElementById('monster2').addEventListener('click', () => {
+            if (!monster2Clicked) {
+                npcBox.innerHTML = "I am Nattapong Suphawirojlert!";
+                npcBox.style.display = "block";
+                monster2Clicked = true; // First interaction done
+            } else {
+                npcBox.innerHTML = "You engage Nattapong Suphawirojlert in battle!";
+                npcBox.style.display = "block";
+
+                // After the 5-second delay, warp to the fight page
+        setTimeout(() => {
+            window.location.href = "Nattapong_suphawirojlert.html"; // Redirect to fight page
+        }, 3000);
+            }
+            setTimeout(() => {
+                npcBox.style.display = "none";
+            }, 3000);
+        });
+    </script>
+    
+    
+</body>
+</html>
